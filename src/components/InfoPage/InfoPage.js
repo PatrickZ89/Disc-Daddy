@@ -1,16 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import RecentGame from '../RecentGame/RecentGame'
+import Chart from '../Chart/Chart'
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
+class InfoPage extends Component {
 
-const InfoPage = () => (
-  <div>
-    <p>
-      Info Page
-    </p>
-  </div>
+  componentDidMount() {
+    console.log('Page mounted');
+    this.props.dispatch({ type: 'FETCH_GAME' })
+
+  }
+
+
+  render() {
+
+    return (
+      <div>
+        <p>
+          Recent Games
+        </p>
+        <table>
+          <thead>
+            <tr><th>Score</th><th>Hole 1</th><th>Hole 2</th><th>Hole 3</th><th>Hole 4</th><th>Hole 5</th><th>Hole 6</th><th>Hole 7</th><th>Hole 8</th><th>Hole 9</th><th>Hole 10</th><th>Hole 11</th><th>Hole 12</th><th>Hole 13</th><th>Hole 14</th><th>Hole 15</th><th>Hole 16</th><th>Hole 17</th><th>Hole 18</th><th>Player</th><th>Delete</th></tr>
+          </thead>
+          <tbody>
+            {this.props.disc.map((item, i) => {
+              return (<RecentGame key={i} item={item} />);
+            })}
+          </tbody>
+        </table>
+        <Chart />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = reduxState => (
+  reduxState
 );
 
-export default InfoPage;
+export default connect(mapStateToProps)(InfoPage);

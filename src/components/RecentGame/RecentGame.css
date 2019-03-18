@@ -1,0 +1,9 @@
+.shelf-item {
+
+    height: 50px;
+}
+
+.shelf-item img {
+    object-fit: cover;
+    height: 150px;
+}

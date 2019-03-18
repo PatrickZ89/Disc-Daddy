@@ -9,7 +9,7 @@ const AboutPage = () => (
   <div>
     <div>
       <p>
-        This about page is for anyone to read!
+        Disc Daddy is always there to help.
       </p>
     </div>
   </div>
