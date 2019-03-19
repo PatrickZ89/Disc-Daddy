@@ -1,9 +1,9 @@
-.shelf-item {
+.score-item {
 
     height: 50px;
 }
 
-.shelf-item img {
+.score-item img {
     object-fit: cover;
     height: 150px;
 }

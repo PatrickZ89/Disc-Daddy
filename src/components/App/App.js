@@ -41,6 +41,7 @@ import HolePage15 from '../HolePage/HolePage15';
 import HolePage16 from '../HolePage/HolePage16';
 import HolePage17 from '../HolePage/HolePage17';
 import HolePage18 from '../HolePage/HolePage18';
+import GameSummary from '../GameSummary/GameSummary';
 
 import './App.css';
 
@@ -188,6 +189,11 @@ class App extends Component {
                 exact
                 path="/hole-page18"
                 component={HolePage18}
+              /> 
+              <ProtectedRoute
+                exact
+                path="/game-summary"
+                component={GameSummary}
               />
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => <h1>404</h1>} />

@@ -24,6 +24,7 @@ const Nav = (props) => (
           </Link>
         </>
       )}
+      {/* Score Input Page */}
       {props.user.id && (
         <>
           <Link className="nav-link" to="/score-input">
@@ -31,16 +32,23 @@ const Nav = (props) => (
           </Link>
         </>
       )}
+      {/* Game Summary Page */}
+       {props.user.id && (
+        <>
+          <Link className="nav-link" to="/game-summary">
+            Game Summary
+          </Link>
+        </>
+      )}
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
           <Link className="nav-link" to="/info">
-            Info Page
+            Player Info
           </Link>
           <LogOutButton className="nav-link"/>
         </>
       )}
-      
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/about">
         About

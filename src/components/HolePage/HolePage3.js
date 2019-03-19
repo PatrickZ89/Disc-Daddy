@@ -4,13 +4,12 @@ import Button from '@material-ui/core/Button';
 
 class HolePage3 extends Component {
 
-    state = {
-        players: '',
-    }
+    state = []
 
 
     componentDidMount() {
         console.log('Page mounted');
+        console.log('Score Reducer:', this.props);
         this.props.dispatch({ type: 'FETCH_PLAYER' })
     };
 
@@ -49,8 +48,9 @@ class HolePage3 extends Component {
     this.props.history.push(path)
     }
     nextHole = () => {
+        this.props.dispatch({ type: 'SET_SCORE', payload: this.state })
         let path = `hole-page4`;
-    this.props.history.push(path)
+        this.props.history.push(path)
     }
 
     render() {

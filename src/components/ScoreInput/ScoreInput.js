@@ -4,8 +4,7 @@ import Button from '@material-ui/core/Button';
 
 class ScoreInput extends Component {
 
-    state = {
-    }
+    state = []
 
     componentDidMount() {
         console.log('Page mounted');
@@ -48,8 +47,9 @@ class ScoreInput extends Component {
     }
 
     nextHole = () => {
+        this.props.dispatch({ type: 'SET_SCORE', payload: this.state })
         let path = `hole-page2`;
-    this.props.history.push(path)
+        this.props.history.push(path)
     }
 
     render() {

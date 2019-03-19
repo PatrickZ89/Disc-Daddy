@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './RecentGame.css';
 
 
-class RecentGame extends Component {
+class GameSummaryTable extends Component {
+
     // removeFromList = (event) => {
     //     console.log(event.target.value )
     //     this.props.dispatch({ type: 'REMOVE', payload: event.target.value })
     // }
+
     render() {
        
         return (
             <tr className="score-item">
-                <td>{this.props.item.score}</td>
-                <td>{this.props.item.hole_1}</td>
+                <td>{this.props.item[0]}</td>
+                <td>{this.props.item[1]}</td> 
                 <td>{this.props.item.hole_2}</td>
                 <td>{this.props.item.hole_3}</td>
                 <td>{this.props.item.hole_4}</td>
@@ -31,8 +32,7 @@ class RecentGame extends Component {
                 <td>{this.props.item.hole_16}</td>
                 <td>{this.props.item.hole_17}</td>
                 <td>{this.props.item.hole_18}</td>
-                <td>{this.props.item.username}</td>
-                <td><button value={this.props.item.id} onClick={this.removeFromList}>Delete</button></td>
+                <td>{this.props.item.username}</td> */}
             </tr>  
         );
     }
@@ -42,4 +42,4 @@ const mapStateToProps = reduxState => (
     reduxState
 );
 
-export default connect(mapStateToProps)(RecentGame);
+export default connect(mapStateToProps)(GameSummaryTable);
