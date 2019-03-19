@@ -17,7 +17,7 @@ class HolePage2 extends Component {
     handleAddClick = (playerNumber) => () => {
         if (!this.state[playerNumber]) {
             this.setState({
-                [playerNumber]: 3,
+                [playerNumber]: 1,
             })
         }
         if (this.state[playerNumber]) {
@@ -32,7 +32,7 @@ class HolePage2 extends Component {
     handleMinusClick = (playerNumber) => () => {
         if (!this.state[playerNumber]) {
             this.setState({
-                [playerNumber]: 2,
+                [playerNumber]: 1,
             })
         }
         if (this.state[playerNumber]) {
@@ -48,9 +48,9 @@ class HolePage2 extends Component {
         let path = `hole-page17`;
     this.props.history.push(path)
     }
-    
+
     nextHole = () => {
-        let path = `hole-page4`;
+        let path = `info`;
     this.props.history.push(path)
     }
 

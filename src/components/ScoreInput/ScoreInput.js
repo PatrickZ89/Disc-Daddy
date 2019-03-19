@@ -5,9 +5,7 @@ import Button from '@material-ui/core/Button';
 class ScoreInput extends Component {
 
     state = {
-        players: '',
     }
-
 
     componentDidMount() {
         console.log('Page mounted');
@@ -17,7 +15,7 @@ class ScoreInput extends Component {
     handleAddClick = (playerNumber) => () => {
         if (!this.state[playerNumber]) {
             this.setState({
-                [playerNumber]: 3,
+                [playerNumber]: 1,
             })
         }
         if (this.state[playerNumber]) {
@@ -32,7 +30,7 @@ class ScoreInput extends Component {
     handleMinusClick = (playerNumber) => () => {
         if (!this.state[playerNumber]) {
             this.setState({
-                [playerNumber]: 2,
+                [playerNumber]: 1,
             })
         }
         if (this.state[playerNumber]) {
@@ -42,6 +40,11 @@ class ScoreInput extends Component {
                 [playerNumber]: newScore,
             })
         }
+    }
+
+    previousPage = () => {
+        let path = `new-game`;
+    this.props.history.push(path)
     }
 
     nextHole = () => {
@@ -55,7 +58,6 @@ class ScoreInput extends Component {
             <div>
                 <h1>Input Scores</h1>
                 <h2>Hole 1</h2>
-
                 <table >
                     <thead>
                         <tr>
@@ -76,7 +78,7 @@ class ScoreInput extends Component {
                         )}
                     </tbody>
                 </table>
-                {/* <Button onClick={this.previousHole} variant="contained" color="primary">Previous Hole</Button> */}
+                <Button onClick={this.previousPage} variant="contained" color="primary">Game Setup</Button>
                 <Button onClick={this.nextHole} variant="contained" color="primary">Next Hole</Button>
             </div>
         );
