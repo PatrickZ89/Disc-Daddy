@@ -7,7 +7,7 @@ import './Nav.css';
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
+      <h2 className="nav-title">Disc Daddy</h2>
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/home">
@@ -16,6 +16,21 @@ const Nav = (props) => (
         and call this link 'Login / Register' if they are not */}
         {props.user.id ? 'Home' : 'Login / Register'}
       </Link>
+      {/* Show the link to the New Game page if the user is logged in */}
+      {props.user.id && (
+        <>
+          <Link className="nav-link" to="/new-game">
+            New Game
+          </Link>
+        </>
+      )}
+      {props.user.id && (
+        <>
+          <Link className="nav-link" to="/score-input">
+            Score Input
+          </Link>
+        </>
+      )}
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
@@ -25,6 +40,7 @@ const Nav = (props) => (
           <LogOutButton className="nav-link"/>
         </>
       )}
+      
       {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/about">
         About
