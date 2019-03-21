@@ -43,6 +43,24 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.post('/gamedata', rejectUnauthenticated, (req, res) => {
+    const gamedata = req.body;
+    const queryText = `INSERT INTO "games" ( "game_id", "date", "course_id", "player_id")
+                VALUES ($1, $2, $3, $4)`;
+    const queryValues = [
+        gamedata.gameID,
+        gamedata.time,
+        gamedata.courseID,
+        gamedata.playerID,
+    ];
+    pool.query(queryText, queryValues)
+        .then(() => { res.sendStatus(201); })
+        .catch((err) => {
+            console.log('Error completing POST Player query', err);
+            res.sendStatus(500);
+        });
+});
+
 router.post('/game', rejectUnauthenticated, (req, res) => {
     console.log("GAME POST:", req.body.length)
     for (let i = 0; i < req.body.length; i++){

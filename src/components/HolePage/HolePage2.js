@@ -66,7 +66,7 @@ class HolePage2 extends Component {
                     <tbody>
                         {this.props.playerReducer.map((player, i) =>
                             <tr key={i}>
-                                <td>{player.username}</td>
+                                <td>{player.name}</td>
                                 <td><button onClick={this.handleMinusClick(i)}>Minus</button></td>
                                 <td>{this.state[i]}</td>
                                 <td><button onClick={this.handleAddClick(i)}>Add</button></td>

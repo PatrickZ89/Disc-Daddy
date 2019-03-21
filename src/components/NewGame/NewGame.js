@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import moment from 'moment';
+
 
 class NewGame extends Component {
 
-    state = {
+    state = [{
         newPlayer: '',
-      };
+    }]
 
-      handleNameChange = event => {
-          
+    handleNameChange = event => {
         this.setState({
             newPlayer: event.target.value,
         });
@@ -23,28 +24,33 @@ class NewGame extends Component {
         });
     };
 
-    newGame = () => {
+    newGame = () => {    
+        let gameID = (this.props.disc[this.props.disc.length-1].game_id)+1; 
+        let time = moment().format();
+        // 'MMMM Do YYYY, h:mm:ss a'
+        for (let i = 0; i < this.props.playerReducer.length; i++) {
 
-
-
+        let playerID=this.props.playerReducer[i].id;
+        let gameData={gameID:gameID, time:time, courseID: 1, playerID:playerID}
+        this.props.dispatch({ type: 'POST_GAMEDATA', payload: gameData })
+        console.log('gameData:', gameData);
+        };
 
         let path = `score-input`;
-    this.props.history.push(path)
+        this.props.history.push(path)
     };
 
     componentDidMount() {
         console.log('Page mounted');
         this.props.dispatch({ type: 'FETCH_GAME' })
         this.props.dispatch({ type: 'FETCH_PLAYER' })
-      };
+    };
 
-      removePlayer = (event) => {
-        console.log(event.target.value )
+    removePlayer = (event) => {
         this.props.dispatch({ type: 'REMOVE_PLAYER', payload: event.target.value })
     }
 
   render() {
-
     return (
       <div>
           <h1>Game Setup</h1>
