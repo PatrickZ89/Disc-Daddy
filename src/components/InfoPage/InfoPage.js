@@ -11,6 +11,10 @@ class InfoPage extends Component {
 
   }
 
+  componentDidCatch(){
+    this.props.dispatch({ type: 'FETCH_GAME' })
+  }
+
 
   render() {
 
@@ -21,7 +25,7 @@ class InfoPage extends Component {
         </p>
         <table>
           <thead>
-            <tr><th>Score</th><th>Hole 1</th><th>Hole 2</th><th>Hole 3</th><th>Hole 4</th><th>Hole 5</th><th>Hole 6</th><th>Hole 7</th><th>Hole 8</th><th>Hole 9</th><th>Hole 10</th><th>Hole 11</th><th>Hole 12</th><th>Hole 13</th><th>Hole 14</th><th>Hole 15</th><th>Hole 16</th><th>Hole 17</th><th>Hole 18</th><th>Player</th><th>Delete</th></tr>
+            <tr><th>Hole 1</th><th>Hole 2</th><th>Hole 3</th><th>Hole 4</th><th>Hole 5</th><th>Hole 6</th><th>Hole 7</th><th>Hole 8</th><th>Hole 9</th><th>Hole 10</th><th>Hole 11</th><th>Hole 12</th><th>Hole 13</th><th>Hole 14</th><th>Hole 15</th><th>Hole 16</th><th>Hole 17</th><th>Hole 18</th><th>Score</th><th>Player</th><th>Date</th></tr>
           </thead>
           <tbody>
             {this.props.disc.map((item, i) => {

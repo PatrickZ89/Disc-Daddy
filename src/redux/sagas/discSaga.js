@@ -52,11 +52,24 @@ function* fetchPlayer() {
     }
   }
 
+  function* postGame(action) {
+    try {
+      yield axios.post('/api/disc/game', action.payload );
+      alert("Adding Game to the Database!")
+    //   yield put({ type: 'SET_GAME'});
+    } catch (error) {
+      console.log('this was an error with the POST- probably your fault');
+      alert('Houston, we have a problem.');
+  
+    }
+  }
+
 function* discSaga() {
   yield takeLatest('FETCH_GAME', fetchGame);
   yield takeLatest('FETCH_PLAYER', fetchPlayer);
   yield takeLatest('ADD_PLAYER', postPlayer);
   yield takeLatest('REMOVE_PLAYER', removePlayer);
+  yield takeLatest('POST_GAME', postGame);
 }
 
 export default discSaga;

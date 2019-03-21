@@ -9,32 +9,24 @@ class HolePage15 extends Component {
 
     componentDidMount() {
         console.log('Page mounted');
-        this.props.dispatch({ type: 'FETCH_PLAYER' })
+        this.props.dispatch({ type: 'FETCH_PLAYER' });
+        for (let i = 0; i < this.props.playerReducer.length; i++) {
+            this.setState({
+                [i]: 3,
+            })
+        };
     };
 
     handleAddClick = (playerNumber) => () => {
-        if (!this.state[playerNumber]) {
-            this.setState({
-                [playerNumber]: 3,
-            })
-        }
-        if (this.state[playerNumber]) {
-
-            let newScore = this.state[playerNumber] + 1;
-            this.setState({
-                [playerNumber]: newScore,
-            })
-        }
+        let newScore = this.state[playerNumber] + 1;
+        this.setState({
+            [playerNumber]: newScore,
+        })
     }
 
     handleMinusClick = (playerNumber) => () => {
-        if (!this.state[playerNumber]) {
-            this.setState({
-                [playerNumber]: 2,
-            })
-        }
+        // If statement checks if playerNumber is truthy, in doing so, keeping playerNumber positive
         if (this.state[playerNumber]) {
-
             let newScore = this.state[playerNumber] - 1;
             this.setState({
                 [playerNumber]: newScore,
@@ -44,7 +36,7 @@ class HolePage15 extends Component {
 
     previousHole = () => {
         let path = `hole-page14`;
-    this.props.history.push(path)
+        this.props.history.push(path)
     }
     nextHole = () => {
         this.props.dispatch({ type: 'SET_SCORE', payload: this.state })

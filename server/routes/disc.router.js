@@ -43,6 +43,50 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.post('/game', rejectUnauthenticated, (req, res) => {
+    console.log("GAME POST:", req.body.length)
+    for (let i = 0; i < req.body.length; i++){
+        const player = req.body[i];
+        // adding total score for each player
+        let score=0;
+        for (let i = 0; i < 18; i++){
+            score=score+player[i];
+        };
+    const queryText = `INSERT INTO "recent_games" ("hole_1", "hole_2", "hole_3", "hole_4", "hole_5", "hole_6", 
+    "hole_7", "hole_8", "hole_9", "hole_10", "hole_11", "hole_12", "hole_13", "hole_14", "hole_15", "hole_16", "hole_17", "hole_18", "player_id", "score")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20);`;
+    const queryValues = [
+        player[0],
+        player[1],
+        player[2],
+        player[3],
+        player[4],
+        player[5],
+        player[6],
+        player[7],
+        player[8],
+        player[9],
+        player[10],
+        player[11],
+        player[12],
+        player[13],
+        player[14],
+        player[15],
+        player[16],
+        player[17],
+        player[18],
+        score,
+    ];
+    pool.query(queryText, queryValues)
+        .then(() => { res.sendStatus(201); })
+        .catch((err) => {
+            console.log('Error completing POST Player query', err);
+            res.sendStatus(500);
+        });
+    }
+});
+
+
 // DELETE route
 router.delete('/:id', (req, res) => {
     const queryText = `DELETE FROM "players" WHERE "id" = $1`

@@ -9,39 +9,30 @@ class HolePage3 extends Component {
 
     componentDidMount() {
         console.log('Page mounted');
-        console.log('Score Reducer:', this.props);
-        this.props.dispatch({ type: 'FETCH_PLAYER' })
+        this.props.dispatch({ type: 'FETCH_PLAYER' });
+        for (let i = 0; i < this.props.playerReducer.length; i++) {
+            this.setState({
+                [i]: 3,
+            })
+        };
     };
 
-    handleAddClick = (playerNumber) => () => {
-        if (!this.state[playerNumber]) {
-            this.setState({
-                [playerNumber]: 3,
-            })
-        }
-        if (this.state[playerNumber]) {
-
-            let newScore = this.state[playerNumber] + 1;
-            this.setState({
-                [playerNumber]: newScore,
-            })
-        }
-    }
+    handleAddClick = (playerNumber) => () => { 
+        let newScore = this.state[playerNumber] + 1;
+        this.setState({
+            [playerNumber]: newScore,
+        })
+}
 
     handleMinusClick = (playerNumber) => () => {
-        if (!this.state[playerNumber]) {
-            this.setState({
-                [playerNumber]: 2,
-            })
-        }
-        if (this.state[playerNumber]) {
-
-            let newScore = this.state[playerNumber] - 1;
-            this.setState({
-                [playerNumber]: newScore,
-            })
-        }
+    // If statement checks if playerNumber is truthy, in doing so, keeping playerNumber positive
+    if (this.state[playerNumber]) {
+        let newScore = this.state[playerNumber] - 1;
+        this.setState({
+            [playerNumber]: newScore,
+        })
     }
+}
 
     previousHole = () => {
         let path = `hole-page2`;

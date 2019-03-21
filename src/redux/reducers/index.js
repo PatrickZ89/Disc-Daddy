@@ -5,6 +5,7 @@ import user from './userReducer';
 import disc from './discReducer';
 import playerReducer from './playerReducer';
 import scoreReducer from './scoreReducer';
+import summaryReducer from './summaryReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   disc,
   playerReducer,
   scoreReducer,
+  summaryReducer,
 });
 
 export default rootReducer;

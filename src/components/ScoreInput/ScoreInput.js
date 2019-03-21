@@ -8,32 +8,25 @@ class ScoreInput extends Component {
 
     componentDidMount() {
         console.log('Page mounted');
-        this.props.dispatch({ type: 'FETCH_PLAYER' })
+        this.props.dispatch({ type: 'FETCH_PLAYER' });
+        for (let i = 0; i < this.props.playerReducer.length; i++) {
+            this.setState({
+                [i]: 3,
+            })
+        };
     };
 
-    handleAddClick = (playerNumber) => () => {
-        if (!this.state[playerNumber]) {
-            this.setState({
-                [playerNumber]: 1,
-            })
-        }
-        if (this.state[playerNumber]) {
 
+    handleAddClick = (playerNumber) => () => {
             let newScore = this.state[playerNumber] + 1;
             this.setState({
                 [playerNumber]: newScore,
             })
-        }
     }
 
     handleMinusClick = (playerNumber) => () => {
-        if (!this.state[playerNumber]) {
-            this.setState({
-                [playerNumber]: 1,
-            })
-        }
+        // If statement checks if playerNumber is truthy, in doing so, keeping playerNumber positive
         if (this.state[playerNumber]) {
-
             let newScore = this.state[playerNumber] - 1;
             this.setState({
                 [playerNumber]: newScore,

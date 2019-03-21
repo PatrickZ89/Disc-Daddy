@@ -12,7 +12,6 @@ class RecentGame extends Component {
        
         return (
             <tr className="score-item">
-                <td>{this.props.item.score}</td>
                 <td>{this.props.item.hole_1}</td>
                 <td>{this.props.item.hole_2}</td>
                 <td>{this.props.item.hole_3}</td>
@@ -31,8 +30,13 @@ class RecentGame extends Component {
                 <td>{this.props.item.hole_16}</td>
                 <td>{this.props.item.hole_17}</td>
                 <td>{this.props.item.hole_18}</td>
+                <td>{this.props.item.score}</td>
                 <td>{this.props.item.username}</td>
-                <td><button value={this.props.item.id} onClick={this.removeFromList}>Delete</button></td>
+                <td>
+                {new Date(this.props.item.date).getMonth() + 1}/ 
+                {new Date(this.props.item.date).getDate()}/
+                {new Date(this.props.item.date).getFullYear()} 
+                </td>
             </tr>  
         );
     }

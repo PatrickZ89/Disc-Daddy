@@ -10,32 +10,24 @@ class HolePage2 extends Component {
     componentDidMount() {
 
         console.log('Props:', this.props.scoreReducer);
-        this.props.dispatch({ type: 'FETCH_PLAYER' })
+        this.props.dispatch({ type: 'FETCH_PLAYER' });
+        for (let i = 0; i < this.props.playerReducer.length; i++) {
+            this.setState({
+                [i]: 3,
+            })
+        };
     };
 
     handleAddClick = (playerNumber) => () => {
-        if (!this.state[playerNumber]) {
-            this.setState({
-                [playerNumber]: 1,
-            })
-        }
-        if (this.state[playerNumber]) {
-
-            let newScore = this.state[playerNumber] + 1;
-            this.setState({
-                [playerNumber]: newScore,
-            })
-        }
+        let newScore = this.state[playerNumber] + 1;
+        this.setState({
+            [playerNumber]: newScore,
+        })
     }
 
     handleMinusClick = (playerNumber) => () => {
-        if (!this.state[playerNumber]) {
-            this.setState({
-                [playerNumber]: 1,
-            })
-        }
+        // If statement checks if playerNumber is truthy, in doing so, keeping playerNumber positive
         if (this.state[playerNumber]) {
-
             let newScore = this.state[playerNumber] - 1;
             this.setState({
                 [playerNumber]: newScore,
@@ -45,14 +37,28 @@ class HolePage2 extends Component {
 
     previousHole = () => {
         let path = `hole-page17`;
-    this.props.history.push(path)
+        this.props.history.push(path)
     }
 
     nextHole = () => {
         this.props.dispatch({ type: 'SET_SCORE', payload: this.state })
         let path = `game-summary`;
-        this.props.history.push(path)
+        this.props.history.push(path);
+        this.scoreSpreader();
     }
+      //spreading the score from an array of 18 objects with player scores to a separate array of scores for each player
+  scoreSpreader = () => {
+    for (let i = 0; i < this.props.playerReducer.length; i++) {
+        const scoreArray = this.props.scoreReducer;
+        const playerScoreArray=[];
+        scoreArray.map((scoreItem) => {
+            playerScoreArray.push(scoreItem[i])
+          });
+          playerScoreArray.push(this.props.playerReducer[i].id)
+          console.log('player scoreArray:', playerScoreArray);
+        this.props.dispatch({ type: 'SET_SUMMARY', payload:  playerScoreArray});
+    }
+  }
 
     render() {
 
