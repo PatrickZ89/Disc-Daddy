@@ -31,7 +31,7 @@ class RecentGame extends Component {
                 <td>{this.props.item.hole_17}</td>
                 <td>{this.props.item.hole_18}</td>
                 <td>{this.props.item.score}</td>
-                <td>{this.props.item.username}</td>
+                <td>{this.props.item.name}</td>
                 <td>
                 {new Date(this.props.item.date).getMonth() + 1}/ 
                 {new Date(this.props.item.date).getDate()}/

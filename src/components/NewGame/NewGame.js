@@ -9,6 +9,7 @@ class NewGame extends Component {
       };
 
       handleNameChange = event => {
+          
         this.setState({
             newPlayer: event.target.value,
         });
@@ -23,6 +24,10 @@ class NewGame extends Component {
     };
 
     newGame = () => {
+
+
+
+
         let path = `score-input`;
     this.props.history.push(path)
     };
@@ -47,7 +52,7 @@ class NewGame extends Component {
           <h3>Players:</h3>
           <ul>
               {this.props.playerReducer.map((player, i) => 
-                <li key={i}>{player.username} <button value={player.id} onClick={this.removePlayer}>remove</button></li> )}
+                <li key={i}>{player.name} <button value={player.id} onClick={this.removePlayer}>remove</button></li> )}
           </ul>
           <h3>Add a New Player</h3>
           <input type='text' placeholder="New Player" value={this.state.newPlayer} onChange={this.handleNameChange} />
