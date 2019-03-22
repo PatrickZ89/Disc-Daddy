@@ -1,4 +1,4 @@
-const gameIDReducer = (state={}, action) => {
+const gameIDReducer = (state=0, action) => {
     switch (action.type) {
       case 'SET_GAMEID':
       state = action.payload;

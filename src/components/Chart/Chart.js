@@ -34,7 +34,7 @@ class Chart extends Component {
     }
 
     componentDidMount(){
-        console.log(`Leo's log:`, this.refs.myLineChart);
+        console.log(this.refs.myLineChart);
         this.initializeChart();
     }
     

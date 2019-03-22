@@ -15,6 +15,15 @@ function* fetchGame() {
   }
 }
 
+function* fetchCurrent(action) {
+    try {
+      const response = yield axios.get('api/disc/current', action.payload);
+      yield put({ type: 'SET_CURRENT', payload: response.data });
+    } catch (error) {
+      console.log('Game get request failed', error);
+    }
+  }
+
 function* fetchPlayer() {
     try {
       const config = {
@@ -79,7 +88,7 @@ function* fetchPlayer() {
   function* postScore(action) {
     try {
       yield axios.post('/api/disc/score', action.payload );
-      alert("Adding Score to the Database!")
+      console.log("Adding Score to the Database!");
     //   yield put({ type: 'SET_GAME'});
     } catch (error) {
       console.log('this was an error with the POST- probably your fault');
@@ -90,6 +99,7 @@ function* fetchPlayer() {
 function* discSaga() {
   yield takeLatest('FETCH_GAME', fetchGame);
   yield takeLatest('FETCH_PLAYER', fetchPlayer);
+  yield takeLatest('FETCH_CURRENT', fetchCurrent);
   yield takeLatest('ADD_PLAYER', postPlayer);
   yield takeLatest('REMOVE_PLAYER', removePlayer);
   yield takeLatest('POST_GAME', postGame);
