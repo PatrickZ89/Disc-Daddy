@@ -27,9 +27,8 @@ class NewGame extends Component {
     newGame = () => {    
         let gameID = (this.props.disc[this.props.disc.length-1].game_id)+1; 
         let time = moment().format();
-        // 'MMMM Do YYYY, h:mm:ss a'
+        this.props.dispatch({ type: 'SET_GAMEID', payload: gameID });
         for (let i = 0; i < this.props.playerReducer.length; i++) {
-
         let playerID=this.props.playerReducer[i].id;
         let gameData={gameID:gameID, time:time, courseID: 1, playerID:playerID}
         this.props.dispatch({ type: 'POST_GAMEDATA', payload: gameData })

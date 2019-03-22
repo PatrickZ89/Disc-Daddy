@@ -10,6 +10,7 @@ class ScoreInput extends Component {
         console.log('Page mounted');
         this.props.dispatch({ type: 'FETCH_PLAYER' });
         for (let i = 0; i < this.props.playerReducer.length; i++) {
+            
             this.setState({
                 [i]: 3,
             })
@@ -40,7 +41,15 @@ class ScoreInput extends Component {
     }
 
     nextHole = () => {
-        this.props.dispatch({ type: 'SET_SCORE', payload: this.state })
+        let gameData;
+        for (let i = 0; i < this.props.playerReducer.length; i++) {
+            let playerID=this.props.playerReducer[i].id;
+            gameData={strokes:this.state[i], playerID:playerID, gameID: this.props.gameIDReducer}
+            this.props.dispatch({ type: 'POST_SCORE', payload: gameData })
+        };
+        // this.props.dispatch({ type: 'POST_SCORE', payload: gameData })
+        // adding score to the database
+        // this.props.dispatch({ type: 'POST_GAMEDATA', payload: gameData })
         let path = `hole-page2`;
         this.props.history.push(path)
     }

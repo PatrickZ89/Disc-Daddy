@@ -8,7 +8,6 @@ class HolePage2 extends Component {
 
     state = []
 
-
     componentDidMount() {
         console.log('Score Reducer:', this.props);
         this.props.dispatch({ type: 'FETCH_PLAYER' });

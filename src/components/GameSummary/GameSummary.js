@@ -11,8 +11,11 @@ class GameSummary extends Component {
     console.log('Game Summary Page Mounted! Number of Players:', this.props.playerReducer.length);
     // this.scoreSpreader();
   }
+  
 
-  //spreading the score from an array of 18 objects with player scores to a separate array of scores for each player
+//   spreading the score from an array of 18 objects with player scores to a separate array 
+//   of scores for each player, and pushing the player ID to the end of each array
+
 //   scoreSpreader = () => {
 //     for (let i = 0; i < this.props.playerReducer.length; i++) {
 //         const scoreArray = this.props.scoreReducer;
