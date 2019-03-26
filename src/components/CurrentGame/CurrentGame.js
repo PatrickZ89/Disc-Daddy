@@ -4,8 +4,10 @@ import './CurrentGame.css';
 
 
 class CurrentGame extends Component {
-   
+
     
+   
+
     render() {
        
         return (
@@ -30,12 +32,12 @@ class CurrentGame extends Component {
                 <td>{this.props.item.hole_18}</td>
                 <td>{this.props.item.score}</td>
                 <td>{this.props.item.name}</td>
-                <td>
+                {/* <td>
                 {new Date(this.props.item.date).getMonth() + 1}/ 
                 {new Date(this.props.item.date).getDate()}/
                 {new Date(this.props.item.date).getFullYear()} 
-                </td>
-            </tr>  
+                </td> */}
+            </tr>
         );
     }
 }

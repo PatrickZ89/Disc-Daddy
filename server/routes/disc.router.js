@@ -15,11 +15,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       });
 });
 
-router.get('/current', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT * FROM "games"
-    WHERE "game_id"=($1);`;
-    const queryValue = req.body.gameIDReducer
-    pool.query(queryText, queryValue)
+router.get('/current/:id', rejectUnauthenticated, (req, res) => {
+    console.log(req.params)
+    const queryText = `SELECT * FROM "games" JOIN "players" ON "games"."player_id" = "players"."id"
+    WHERE "game_id"=($1) ORDER BY "players"."id";`;
+    pool.query(queryText, [Number(req.params.id)])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
         console.log('Error with GET', err);
@@ -77,9 +77,10 @@ router.post('/score', rejectUnauthenticated, (req, res) => {
     console.log('gamedata:', gamedata)
     const holeNames = ['hole_1', 'hole_2', 'hole_3', 'hole_4', 'hole_5', 'hole_6', 'hole_7', 'hole_8', 'hole_9', 'hole_10', 'hole_11', 'hole_12', 'hole_13', 'hole_14', 'hole_15', 'hole_16', 'hole_17', 'hole_18'];
     if(holeNames.includes(gamedata.hole)) {
-        const queryText = `UPDATE "games" SET ${gamedata.hole} = $1 WHERE "game_id"=$2 AND "player_id"=$3;`;
+        const queryText = `UPDATE "games" SET ${gamedata.hole} = $1, "score"=$2 WHERE "game_id"=$3 AND "player_id"=$4;`;
         const queryValues = [
             gamedata.strokes,
+            gamedata.score,
             gamedata.gameID,
             gamedata.playerID,
         ];

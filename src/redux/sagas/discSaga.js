@@ -17,7 +17,9 @@ function* fetchGame() {
 
 function* fetchCurrent(action) {
     try {
-      const response = yield axios.get('api/disc/current', action.payload);
+        console.log('PAts payload action:', action.payload)
+      const response = yield axios.get(`api/disc/current/${action.payload.gameID}`);
+      console.log('PAts response:', response)
       yield put({ type: 'SET_CURRENT', payload: response.data });
     } catch (error) {
       console.log('Game get request failed', error);
@@ -77,11 +79,10 @@ function* fetchPlayer() {
     try {
       yield axios.post('/api/disc/game', action.payload );
       alert("Adding Game to the Database!")
-    //   yield put({ type: 'SET_GAME'});
+    //   yield put({ type: 'SET_GAME', payload: });
     } catch (error) {
       console.log('this was an error with the POST- probably your fault');
       alert('Houston, we have a problem.');
-  
     }
   }
 
@@ -89,7 +90,7 @@ function* fetchPlayer() {
     try {
       yield axios.post('/api/disc/score', action.payload );
       console.log("Adding Score to the Database!");
-    //   yield put({ type: 'SET_GAME'});
+      yield put({ type: 'FETCH_CURRENT', payload: action.payload});
     } catch (error) {
       console.log('this was an error with the POST- probably your fault');
       alert('Houston, we have a problem.');

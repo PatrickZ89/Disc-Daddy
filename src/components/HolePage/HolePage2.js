@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import CurrentGame from '../CurrentGame/CurrentGame';
+import GameTable from '../GameTable/GameTable';
 
 class HolePage2 extends Component {
 
-    state = []
+    state = [
+    ]
 
      componentDidMount() {
         // if (!this.props.gameIDReducer) {
@@ -15,11 +16,12 @@ class HolePage2 extends Component {
         //     this.props.dispatch({ type: 'SET_GAMEID', payload: gameID });
         // }
         // let gameID = (this.props.disc[this.props.disc.length - 1].game_id);
-        let gameID = this.props.gameIDReducer;
-        this.props.dispatch({ type: 'FETCH_CURRENT', payload: gameID });
-       
-        console.log('Score Reducer:', this.props);
+        // let gameID = this.props.gameIDReducer;
+        // this.props.dispatch({ type: 'FETCH_CURRENT', payload: gameID });
+        // console.log('Score Reducer:', this.props);
+        // console.log(this.props.playerReducer.length)
         this.props.dispatch({ type: 'FETCH_PLAYER' });
+        console.log('# of players:', this.props.playerReducer.length)
         for (let i = 0; i < this.props.playerReducer.length; i++) {
             this.setState({
                 [i]: 3,
@@ -54,8 +56,9 @@ class HolePage2 extends Component {
         let gameData;
         
         for (let i = 0; i < this.props.playerReducer.length; i++) {
+            let score = this.state[i]+this.props.currentGameReducer[i].score;
             let playerID = this.props.playerReducer[i].id;
-            gameData = { strokes: this.state[i], playerID: playerID, gameID: this.props.gameIDReducer, hole: 'hole_2' }
+            gameData = { strokes: this.state[i], score: score, playerID: playerID, gameID: this.props.gameIDReducer, hole: 'hole_2' }
             console.log('Game Data:', gameData)
             this.props.dispatch({ type: 'POST_SCORE', payload: gameData })
         };
@@ -63,6 +66,21 @@ class HolePage2 extends Component {
         let path = `hole-page3`;
         this.props.history.push(path)
     }
+   
+
+    // scoreSpreader = () => {
+    //     for (let i = 0; i < this.props.playerReducer.length; i++) {
+    //         const scoreArray = this.props.scoreReducer;
+    //         const playerScoreArray=[];
+    //         scoreArray.map((scoreItem) => {
+    //             playerScoreArray.push(scoreItem[i])
+    //           });
+    //           playerScoreArray.push(this.props.playerReducer[i].id)
+    //           console.log('player scoreArray:', playerScoreArray);
+    //         this.props.dispatch({ type: 'SET_SUMMARY', payload:  playerScoreArray});
+    //     }
+    //   }
+
 
     render() {
 
@@ -93,16 +111,7 @@ class HolePage2 extends Component {
                 </table>
                 <Button onClick={this.previousHole} variant="contained" color="primary">Previous Hole</Button>
                 <Button onClick={this.nextHole} variant="contained" color="primary">Next Hole</Button>
-                <table>
-                    <thead>
-                        <tr><th>Hole 1</th><th>Hole 2</th><th>Hole 3</th><th>Hole 4</th><th>Hole 5</th><th>Hole 6</th><th>Hole 7</th><th>Hole 8</th><th>Hole 9</th><th>Hole 10</th><th>Hole 11</th><th>Hole 12</th><th>Hole 13</th><th>Hole 14</th><th>Hole 15</th><th>Hole 16</th><th>Hole 17</th><th>Hole 18</th><th>Player ID</th><th>Score</th></tr>
-                    </thead>
-                    <tbody>
-                        {this.props.currentGameReducer.map((item, i) => {
-                            return (<CurrentGame key={i} item={item} />);
-                        })}
-                    </tbody>
-                </table>
+                <GameTable />
             </div>
         );
     }

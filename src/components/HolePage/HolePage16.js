@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import CurrentGame from '../CurrentGame/CurrentGame';
+import GameTable from '../GameTable/GameTable';
 
 class HolePage16 extends Component {
 
@@ -50,8 +50,9 @@ class HolePage16 extends Component {
         //assembling game data for sending
         let gameData;
         for (let i = 0; i < this.props.playerReducer.length; i++) {
+            let score = this.state[i]+this.props.currentGameReducer[i].score;
             let playerID=this.props.playerReducer[i].id;
-            gameData={strokes:this.state[i], playerID:playerID, gameID: this.props.gameIDReducer, hole:'hole_16'}
+            gameData={strokes:this.state[i], score: score, playerID:playerID, gameID: this.props.gameIDReducer, hole:'hole_16'}
             
             this.props.dispatch({ type: 'POST_SCORE', payload: gameData })
         };
@@ -89,16 +90,7 @@ class HolePage16 extends Component {
                 </table>
                 <Button onClick={this.previousHole} variant="contained" color="primary">Previous Hole</Button>
                 <Button onClick={this.nextHole} variant="contained" color="primary">Next Hole</Button>
-                <table>
-                    <thead>
-                        <tr><th>Hole 1</th><th>Hole 2</th><th>Hole 3</th><th>Hole 4</th><th>Hole 5</th><th>Hole 6</th><th>Hole 7</th><th>Hole 8</th><th>Hole 9</th><th>Hole 10</th><th>Hole 11</th><th>Hole 12</th><th>Hole 13</th><th>Hole 14</th><th>Hole 15</th><th>Hole 16</th><th>Hole 17</th><th>Hole 18</th><th>Player ID</th><th>Score</th></tr>
-                    </thead>
-                    <tbody>
-                        {this.props.currentGameReducer.map((item, i) => {
-                            return (<CurrentGame key={i} item={item} />);
-                        })}
-                    </tbody>
-                </table>
+                <GameTable />
             </div>
         );
     }

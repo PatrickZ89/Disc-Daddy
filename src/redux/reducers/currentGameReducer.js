@@ -2,7 +2,7 @@ const currentGameReducer = (state=[], action) => {
     switch (action.type) {
       case 'SET_CURRENT':
       state=[...state, action.payload];
-        return state;
+        return action.payload;
       default:
         return state;
     }
