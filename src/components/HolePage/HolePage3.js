@@ -8,7 +8,7 @@ class HolePage3 extends Component {
     state = []
 
     componentDidMount() {
-        console.log('Page mounted');
+        console.log('Page mounted', this.props);
 
         // this.props.dispatch({ type: 'FETCH_GAME' });
         // fetching players, and setting default state for each player

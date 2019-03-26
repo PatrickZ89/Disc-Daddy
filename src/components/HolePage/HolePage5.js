@@ -12,7 +12,7 @@ class HolePage5 extends Component {
         console.log('Page mounted');
         // fetching players, and setting default state for each player
 
-        // this.props.dispatch({ type: 'FETCH_GAME' });
+        // this.props.dispatch({ type: 'FETCH_' });
 
         this.props.dispatch({ type: 'FETCH_PLAYER' });
         for (let i = 0; i < this.props.playerReducer.length; i++) {
