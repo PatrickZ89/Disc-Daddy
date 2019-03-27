@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import GameTable from '../GameTable/GameTable';
 
-class HolePage11 extends Component {
+class PlayerInput extends Component {
 
-    state = []
-
+    state = {
+        currentHole: 1,
+    }
 
     componentDidMount() {
         console.log('Page mounted');
-        this.props.dispatch({ type: 'FETCH_GAME' });
-        // fetching players, and setting default state for each player
         this.props.dispatch({ type: 'FETCH_PLAYER' });
         for (let i = 0; i < this.props.playerReducer.length; i++) {
             this.setState({
@@ -20,15 +18,16 @@ class HolePage11 extends Component {
         };
     };
 
+
     handleAddClick = (playerNumber) => () => {
-        let newScore = this.state[playerNumber] + 1;
-        this.setState({
-            [playerNumber]: newScore,
-        })
+            let newScore = this.state[playerNumber] + 1;
+            this.setState({
+                [playerNumber]: newScore,
+            })
     }
 
     handleMinusClick = (playerNumber) => () => {
-        // If statement checks if playerNumber is truthy, in doing so, keeping playerNumber positive
+        // If statement checks if playerNumber is truthy, keeping playerNumber positive
         if (this.state[playerNumber]) {
             let newScore = this.state[playerNumber] - 1;
             this.setState({
@@ -37,36 +36,41 @@ class HolePage11 extends Component {
         }
     }
 
-    previousHole = () => {
-        let path = `hole-page10`;
-        this.props.history.push(path)
+    previousPage = () => {
+        this.setState({
+            currentHole: this.state.currentHole-1,
+        })
     }
+
+
     nextHole = () => {
-        // if gameID does not exist in reducer, set to last game created's ID
-        if(!this.props.gameIDReducer){
-            let gameID = (this.props.disc[this.props.disc.length-1].game_id); 
-        this.props.dispatch({ type: 'SET_GAMEID', payload: gameID });
-        }
-        //assembling game data for sending
+       
+        // assembling game data for POST
         let gameData;
         for (let i = 0; i < this.props.playerReducer.length; i++) {
-            let score = this.state[i]+this.props.currentGameReducer[i].score;
             let playerID=this.props.playerReducer[i].id;
-            gameData={strokes:this.state[i], score: score, playerID:playerID, gameID: this.props.gameIDReducer, hole:'hole_11'}
+            gameData={strokes:this.state[i], score:this.state[i], playerID:playerID, gameID: this.props.gameIDReducer, hole:'hole_'+this.state.currentHole}
+            // adding score to the database
             this.props.dispatch({ type: 'POST_SCORE', payload: gameData })
         };
-        this.props.dispatch({ type: 'SET_SCORE', payload: this.state })
-        let path = `hole-page12`;
-        this.props.history.push(path)
+        this.setState({
+            currentHole: this.state.currentHole+1,
+        })
+        // resetting default strokes to PAR (3)
+        for (let i = 0; i < this.props.playerReducer.length; i++) {
+            this.setState({
+                [i]: 3,
+            })
+        };
     }
+    
 
     render() {
 
         return (
             <div>
                 <h1>Input Scores</h1>
-                <h2>Hole 11</h2>
-
+                <h2>Hole {this.state.currentHole}</h2>
                 <table >
                     <thead>
                         <tr>
@@ -87,9 +91,8 @@ class HolePage11 extends Component {
                         )}
                     </tbody>
                 </table>
-                <Button onClick={this.previousHole} variant="contained" color="primary">Previous Hole</Button>
+                <Button onClick={this.previousPage} variant="contained" color="primary">Game Setup</Button>
                 <Button onClick={this.nextHole} variant="contained" color="primary">Next Hole</Button>
-                <GameTable />
             </div>
         );
     }
@@ -99,4 +102,4 @@ const mapStateToProps = reduxState => (
     reduxState
 );
 
-export default connect(mapStateToProps)(HolePage11);
+export default connect(mapStateToProps)(PlayerInput);
