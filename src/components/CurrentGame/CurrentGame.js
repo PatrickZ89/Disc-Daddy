@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './RecentGame.css';
+import './CurrentGame.css';
 
 
-class RecentGame extends Component {
-    // removeFromList = (event) => {
-    //     console.log(event.target.value )
-    //     this.props.dispatch({ type: 'REMOVE', payload: event.target.value })
-    // }
+class CurrentGame extends Component {
+
+    
+   
+
     render() {
        
         return (
@@ -32,12 +32,12 @@ class RecentGame extends Component {
                 <td>{this.props.item.hole_18}</td>
                 <td>{this.props.item.score}</td>
                 <td>{this.props.item.name}</td>
-                <td>
+                {/* <td>
                 {new Date(this.props.item.date).getMonth() + 1}/ 
                 {new Date(this.props.item.date).getDate()}/
                 {new Date(this.props.item.date).getFullYear()} 
-                </td>
-            </tr>  
+                </td> */}
+            </tr>
         );
     }
 }
@@ -46,4 +46,4 @@ const mapStateToProps = reduxState => (
     reduxState
 );
 
-export default connect(mapStateToProps)(RecentGame);
+export default connect(mapStateToProps)(CurrentGame);

@@ -1,14 +1,25 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // GET route
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT * FROM "recent_games"
-    JOIN "players" ON "recent_games"."player_id" = "players"."id";`;
+    const queryText = `SELECT * FROM "games"
+    JOIN "players" ON "games"."player_id" = "players"."id" ORDER BY "games"."id";`;
     pool.query(queryText)
+      .then((result) => { res.send(result.rows); })
+      .catch((err) => {
+        console.log('Error with GET', err);
+        res.sendStatus(500);
+      });
+});
+
+router.get('/current/:id', rejectUnauthenticated, (req, res) => {
+    console.log(req.params)
+    const queryText = `SELECT * FROM "games" JOIN "players" ON "games"."player_id" = "players"."id"
+    WHERE "game_id"=($1) ORDER BY "players"."id";`;
+    pool.query(queryText, [Number(req.params.id)])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
         console.log('Error with GET', err);
@@ -30,7 +41,7 @@ router.get('/player', rejectUnauthenticated, (req, res) => {
 // POST route
 router.post('/', rejectUnauthenticated, (req, res) => {
     const player = req.body;
-    const queryText = `INSERT INTO "players" ( "username")
+    const queryText = `INSERT INTO "players" ( "name")
                 VALUES ($1)`;
     const queryValues = [
         player.newPlayer,
@@ -42,6 +53,50 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         });
 });
+
+router.post('/gamedata', rejectUnauthenticated, (req, res) => {
+    const gamedata = req.body;
+    const queryText = `INSERT INTO "games" ( "game_id", "date", "course_id", "player_id")
+                VALUES ($1, $2, $3, $4)`;
+    const queryValues = [
+        gamedata.gameID,
+        gamedata.time,
+        gamedata.courseID,
+        gamedata.playerID,
+    ];
+    pool.query(queryText, queryValues)
+        .then(() => { res.sendStatus(201); })
+        .catch((err) => {
+            console.log('Error completing POST Player query', err);
+            res.sendStatus(500);
+        });
+});
+
+router.post('/score', rejectUnauthenticated, (req, res) => {
+    const gamedata = req.body;
+    console.log('gamedata:', gamedata)
+    const holeNames = ['hole_1', 'hole_2', 'hole_3', 'hole_4', 'hole_5', 'hole_6', 'hole_7', 'hole_8', 'hole_9', 'hole_10', 'hole_11', 'hole_12', 'hole_13', 'hole_14', 'hole_15', 'hole_16', 'hole_17', 'hole_18'];
+    if(holeNames.includes(gamedata.hole)) {
+        const queryText = `UPDATE "games" SET ${gamedata.hole} = $1, "score"=$2 WHERE "game_id"=$3 AND "player_id"=$4;`;
+        const queryValues = [
+            gamedata.strokes,
+            gamedata.score,
+            gamedata.gameID,
+            gamedata.playerID,
+        ];
+        pool.query(queryText, queryValues)
+            .then(() => { res.sendStatus(201); })
+            .catch((err) => {
+                console.log('Error completing POST SCORE query', err);
+                res.sendStatus(500);
+            });
+
+    } else {
+        res.sendStatus(500);
+    }
+   
+});
+
 
 router.post('/game', rejectUnauthenticated, (req, res) => {
     console.log("GAME POST:", req.body.length)

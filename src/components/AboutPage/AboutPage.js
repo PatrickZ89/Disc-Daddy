@@ -1,4 +1,5 @@
 import React from 'react';
+import MapContainer from '../MapContainer/MapContainer';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -11,6 +12,7 @@ const AboutPage = () => (
       <p>
         Disc Daddy is always there to help.
       </p>
+      <MapContainer />
     </div>
   </div>
 );

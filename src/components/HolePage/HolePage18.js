@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import GameTable from '../GameTable/GameTable';
 
 class HolePage2 extends Component {
 
@@ -8,8 +9,12 @@ class HolePage2 extends Component {
 
 
     componentDidMount() {
-
-        console.log('Props:', this.props.scoreReducer);
+        // if gameID does not exist in reducer, set to last game created's ID
+        // if(!this.props.gameIDReducer){
+        //     let gameID = (this.props.disc[this.props.disc.length-1].game_id); 
+        // this.props.dispatch({ type: 'SET_GAMEID', payload: gameID });
+        // }
+        // fetching players, and setting default state for each player
         this.props.dispatch({ type: 'FETCH_PLAYER' });
         for (let i = 0; i < this.props.playerReducer.length; i++) {
             this.setState({
@@ -41,24 +46,38 @@ class HolePage2 extends Component {
     }
 
     nextHole = () => {
+        // if gameID does not exist in reducer, set to last game created's ID
+        // if(!this.props.gameIDReducer){
+        //     let gameID = (this.props.disc[this.props.disc.length-1].game_id); 
+        // this.props.dispatch({ type: 'SET_GAMEID', payload: gameID });
+        // }
+        //assembling game data for sending
+        let gameData;
+        for (let i = 0; i < this.props.playerReducer.length; i++) {
+            let score = this.state[i]+this.props.currentGameReducer[i].score;
+            let playerID=this.props.playerReducer[i].id;
+            gameData={strokes:this.state[i], score: score, playerID:playerID, gameID: this.props.gameIDReducer, hole:'hole_18'}
+            
+            this.props.dispatch({ type: 'POST_SCORE', payload: gameData })
+        };
         this.props.dispatch({ type: 'SET_SCORE', payload: this.state })
         let path = `game-summary`;
         this.props.history.push(path);
-        this.scoreSpreader();
+        // this.scoreSpreader();
     }
       //spreading the score from an array of 18 objects with player scores to a separate array of scores for each player
-  scoreSpreader = () => {
-    for (let i = 0; i < this.props.playerReducer.length; i++) {
-        const scoreArray = this.props.scoreReducer;
-        const playerScoreArray=[];
-        scoreArray.map((scoreItem) => {
-            playerScoreArray.push(scoreItem[i])
-          });
-          playerScoreArray.push(this.props.playerReducer[i].id)
-          console.log('player scoreArray:', playerScoreArray);
-        this.props.dispatch({ type: 'SET_SUMMARY', payload:  playerScoreArray});
-    }
-  }
+//   scoreSpreader = () => {
+//     for (let i = 0; i < this.props.playerReducer.length; i++) {
+//         const scoreArray = this.props.scoreReducer;
+//         const playerScoreArray=[];
+//         scoreArray.map((scoreItem) => {
+//             playerScoreArray.push(scoreItem[i])
+//           });
+//           playerScoreArray.push(this.props.playerReducer[i].id)
+//           console.log('player scoreArray:', playerScoreArray);
+//         this.props.dispatch({ type: 'SET_SUMMARY', payload:  playerScoreArray});
+//     }
+//   }
 
     render() {
 
@@ -79,7 +98,7 @@ class HolePage2 extends Component {
                     <tbody>
                         {this.props.playerReducer.map((player, i) =>
                             <tr key={i}>
-                                <td>{player.username}</td>
+                                <td>{player.name}</td>
                                 <td><button onClick={this.handleMinusClick(i)}>Minus</button></td>
                                 <td>{this.state[i]}</td>
                                 <td><button onClick={this.handleAddClick(i)}>Add</button></td>
@@ -89,6 +108,7 @@ class HolePage2 extends Component {
                 </table>
                 <Button onClick={this.previousHole} variant="contained" color="primary">Previous Hole</Button>
                 <Button onClick={this.nextHole} variant="contained" color="primary">Next Hole</Button>
+                <GameTable />
             </div>
         );
     }

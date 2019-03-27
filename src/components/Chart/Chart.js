@@ -11,7 +11,7 @@ class Chart extends Component {
             labels: ['Game One', 'Game Two', 'Game Three', 'Game Four', 'Game Five', 'Game Six'],
             datasets: [
                 {
-                    label: 'Disc Golf Scores',
+                    label: 'Player 1 Scores',
                     data: [
                         54,
                         67,
@@ -28,13 +28,32 @@ class Chart extends Component {
                     borderWidth: 2,
                     pointBorderColor: "#fff",
                     pointBackgroundColor: "rgba(173, 53, 186, 0.1)",
+                },
+                {
+                    label: 'Player 2 Scores',
+                    data: [
+                        59,
+                        52,
+                        64,
+                        56,
+                        69,
+                        55
+                    ],
+                    backgroundColor: 
+                    '#AD35BA',
+                    borderColor: [
+                        '#AD35BA'
+                    ],
+                    borderWidth: 2,
+                    pointBorderColor: "#fff",
+                    pointBackgroundColor: "rgba(173, 53, 186, 0.1)",
                 }
             ]
         }
     }
 
     componentDidMount(){
-        console.log(`Leo's log:`, this.refs.myLineChart);
+        console.log(this.refs.myLineChart);
         this.initializeChart();
     }
     
@@ -47,10 +66,17 @@ class Chart extends Component {
         gradientFill.addColorStop(0, "rgba(173, 53, 186, 1)");
         gradientFill.addColorStop(1, "rgba(173, 53, 186, 0.1)");
         let newChartData = this.state.chartData;
-        newChartData.datasets[0].backgroundColor = gradientFill;
-        this.setState({
-            newChartData,
-        });
+        for (let i = 0; i < newChartData.datasets.length; i++) {
+            const element = newChartData.datasets[i];
+            element.backgroundColor= gradientFill;
+            this.setState({
+                newChartData,
+            });
+        }
+        // newChartData.datasets[0].backgroundColor = gradientFill;
+        // this.setState({
+        //     newChartData,
+        // });
     }
     
 

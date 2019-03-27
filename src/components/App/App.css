@@ -2,6 +2,13 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
     background-color: rgb(32, 37, 61);
+    background-image: 
+    url('/images/dgnight.jpg'),
+    radial-gradient(
+        #c40e63,
+      rgb(22, 20, 156));
+    background-size: cover;
+    color: rgb(179, 179, 179);
 }
 
 .alert {
