@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+// no longer using this component
 
 class GameSummaryTable extends Component {
 
@@ -9,9 +10,7 @@ class GameSummaryTable extends Component {
     //     this.props.dispatch({ type: 'REMOVE', payload: event.target.value })
     // }
 
-    componentDidMount(){
-        console.log('Working?', this.props.item);
-    }
+    
 
     scoreTotal=()=>{
         let total = 0;

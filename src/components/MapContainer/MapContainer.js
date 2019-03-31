@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-require('dotenv').config();
-
+// require('dotenv').config();
+// import GOOGLE_API_KEY from 'dotenv'
+// const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
 
 class MapContainer extends Component {
 
@@ -99,6 +100,18 @@ class MapContainer extends Component {
                     <h1>{this.state.selectedPlace.name}</h1>
                 </div>
             </InfoWindow>
+            <Marker onClick={this.onMarkerClick}
+                name={'Kaposia Disc Golf Course'} 
+                position={this.state.courseLocation}
+                />
+
+            <InfoWindow
+                marker={this.state.activeMarker}
+                visible={this.state.showingInfoWindow}>
+                <div>
+                    <h1>{this.state.selectedPlace.name}</h1>
+                </div>
+            </InfoWindow>
         </Map>
 
 
@@ -126,6 +139,6 @@ class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ``
+    apiKey: `AIzaSyDWzOh2JStLGdQ8EYCP-HnSoaYdpAR4W7E`
 })(MapContainer);
 

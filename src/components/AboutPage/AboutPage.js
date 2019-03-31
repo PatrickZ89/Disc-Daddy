@@ -9,9 +9,9 @@ import MapContainer from '../MapContainer/MapContainer';
 const AboutPage = () => (
   <div>
     <div>
-      <p>
+      {/* <p>
         Disc Daddy is always there to help.
-      </p>
+      </p> */}
       <MapContainer />
     </div>
   </div>

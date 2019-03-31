@@ -68,10 +68,10 @@ class HolePage2 extends Component {
       //spreading the score from an array of 18 objects with player scores to a separate array of scores for each player
 //   scoreSpreader = () => {
 //     for (let i = 0; i < this.props.playerReducer.length; i++) {
-//         const scoreArray = this.props.scoreReducer;
-//         const playerScoreArray=[];
+//         const scoreArray = this.props.currentGameReducer[i];
+//         // const playerScoreArray=[];
 //         scoreArray.map((scoreItem) => {
-//             playerScoreArray.push(scoreItem[i])
+//             (scoreItem[i])
 //           });
 //           playerScoreArray.push(this.props.playerReducer[i].id)
 //           console.log('player scoreArray:', playerScoreArray);

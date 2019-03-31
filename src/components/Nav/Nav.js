@@ -10,7 +10,7 @@ const Nav = (props) => (
       <h2 className="nav-title">Disc Daddy</h2>
     </Link>
     <div className="nav-right">
-      <Link className="nav-link" to="/home">
+      <Link className="nav-link circleBehind" to="/home">
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
@@ -19,7 +19,7 @@ const Nav = (props) => (
       {/* Show the link to the New Game page if the user is logged in */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/new-game">
+          <Link className="nav-link circleBehind" to="/new-game">
             New Game
           </Link>
         </>
@@ -27,15 +27,15 @@ const Nav = (props) => (
       {/* Score Input Page */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/score-input">
+          <Link className="nav-link circleBehind" to="/score-input">
             Score Input
           </Link>
         </>
       )}
       {/* Game Summary Page */}
-       {props.user.id && (
+      {props.user.id && (
         <>
-          <Link className="nav-link" to="/game-summary">
+          <Link className="nav-link circleBehind" to="/game-summary">
             Game Summary
           </Link>
         </>
@@ -43,15 +43,20 @@ const Nav = (props) => (
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/info">
-            Player Info
+          <Link className="nav-link circleBehind" to="/info">
+            Game History
           </Link>
-          <LogOutButton className="nav-link"/>
+          <button
+            className="nav-link"
+            onClick={() => props.dispatch({ type: 'LOGOUT' })}
+          >
+            Log Out
+          </button>
         </>
       )}
       {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
-        About
+      <Link className="nav-link circleBehind" to="/about">
+        Map
       </Link>
     </div>
   </div>

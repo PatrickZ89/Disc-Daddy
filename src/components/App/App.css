@@ -1,14 +1,21 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Montserrat', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    
     background-color: rgb(32, 37, 61);
     background-image: 
     url('/images/dgnight.jpg'),
-    radial-gradient(
+    linear-gradient(to bottom right,#002f4b,#dc4225);
+    /* opacity: .6;  */
+    /* radial-gradient(
         #c40e63,
-      rgb(22, 20, 156));
+      rgb(22, 20, 156)); */
     background-size: cover;
     color: rgb(179, 179, 179);
+    /* font-family: 'Rock Salt', cursive; */
+   
+        
+      
 }
 
 .alert {
@@ -55,3 +62,29 @@ input {
     border-bottom:1px solid #444; 
     cursor: pointer;
 }
+
+tbody tr:nth-child(odd) {
+    background-color: #6a15f369;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #c643ee69;
+  }
+  
+  tbody tr {
+    /* background-image: url(noise.png); */
+  }
+  
+  li{
+    background-color: #6a15f39f;
+  }
+
+  table {
+    /* margin-left: 30px; */
+    background: linear-gradient(to right, #d110b1,#101dcc);
+  }
+  .burger:hover {
+    background-color: #AD35BA;
+  }
+
+

@@ -8,14 +8,13 @@
 
 .nav {
   overflow: hidden;
-  background-color: #304ffe
-  ;
+  background: linear-gradient(to right, #d110b1b2,#101cccab); 
 }
 
 .nav-link {
   float: left;
   color: #fafafa;
-  background-color: #304ffe
+  background-color: #304ffe00
   ;
   text-align: center;
   padding: 24px 10px;
@@ -30,9 +29,45 @@
 }
 
 .nav-link:hover {
-  background-color: #AD35BA;
+  background-color: rgba(173, 53, 186, 0.486);
 }
 
 .nav-right {
   float: right;
+}
+
+/* Circle behind */
+div.circleBehind a:before, div.circleBehind a:after
+{
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border: 4px solid #0277bd;
+    transform: translateX(-50%) translateY(-50%) scale(0.8);
+    border-radius: 50%;
+    background: transparent;
+    content: "";
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: -1;
+}
+
+div.circleBehind a:after
+{
+    border-width: 2px;
+    transition: all 0.4s;
+}
+
+div.circleBehind a:hover:before
+{
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
+div.circleBehind a:hover:after
+{
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%) scale(1.3);
 }
