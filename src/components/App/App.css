@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous');
 body {
-    font-family: 'Montserrat', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Righteous', cursive;
     margin: 0px;
     
     background-color: rgb(32, 37, 61);
@@ -62,6 +63,9 @@ input {
     border-bottom:1px solid #444; 
     cursor: pointer;
 }
+th, td {
+    font-family: 'Righteous', cursive;
+}
 
 tbody tr:nth-child(odd) {
     background-color: #6a15f369;
@@ -71,17 +75,20 @@ tbody tr:nth-child(odd) {
     background-color: #c643ee69;
   }
   
-  tbody tr {
-    /* background-image: url(noise.png); */
-  }
   
-  li{
+  li {
     background-color: #6a15f39f;
+  }
+
+.dark {
+    background-color: #6a15f39f;
+    color: #f8f8f8;
   }
 
   table {
     /* margin-left: 30px; */
-    background: linear-gradient(to right, #d110b1,#101dcc);
+
+    background: linear-gradient(to right, #ce0c6de7,#0f3dd6f6);
   }
   .burger:hover {
     background-color: #AD35BA;

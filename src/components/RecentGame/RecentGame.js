@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './RecentGame.css';
 
+// this component is no longer is use
 
 class RecentGame extends Component {
     // removeFromList = (event) => {

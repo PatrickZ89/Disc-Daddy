@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 
 const Nav = (props) => (
@@ -46,6 +45,9 @@ const Nav = (props) => (
           <Link className="nav-link circleBehind" to="/info">
             Game History
           </Link>
+          <Link className="nav-link circleBehind" to="/about">
+            Map
+      </Link>
           <button
             className="nav-link"
             onClick={() => props.dispatch({ type: 'LOGOUT' })}
@@ -55,9 +57,7 @@ const Nav = (props) => (
         </>
       )}
       {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link circleBehind" to="/about">
-        Map
-      </Link>
+
     </div>
   </div>
 );

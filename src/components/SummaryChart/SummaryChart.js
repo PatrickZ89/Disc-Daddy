@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2';
 
-class Chart extends Component {
+class SummaryChart extends Component {
 
     state = {
         chartData: {
             labels: ['Hole 1','Hole 2','Hole 3','Hole 4','Hole 5','Hole 6','Hole 7','Hole 8','Hole 9','Hole 10','Hole 11', 'Hole 12', 'Hole 13', 'Hole 14', 'Hole 15', 'Hole 16', 'Hole 17', 'Hole 18'],
-            datasets: this.props.disc.map((player)=>{
+            datasets: this.props.currentGameReducer.map((player)=>{
                 return {
                 label: player.name,
                 data: [player.hole_1,
@@ -38,10 +37,10 @@ class Chart extends Component {
                 ],
                 borderWidth: 2,
                 pointBorderColor: "#fff",
-                pointBackgroundColor: "rgba(173, 53, 186, 0.1)",
-                
+                pointBackgroundColor: "rgba(173, 53, 186, 0.1)"
             }
             }),
+           
             
             //         [
             //     {
@@ -146,11 +145,6 @@ class Chart extends Component {
                         height={500}
                         ref="myLineChart"
                         options={{
-                            // scales: {
-                            //     xAxes: [{
-                            //       type: 'linear'
-                            //     }]
-                            //   },
                             title: {
                                 display: true,
                                 text: 'Recent Games Played',
@@ -164,7 +158,6 @@ class Chart extends Component {
                         }}
                     />
                 </div>
-                 {/* <Button onClick={this.chartData} variant="contained" color="primary">Chart Data</Button> */}
             </>
         );
     }
@@ -174,4 +167,4 @@ const mapStateToProps = reduxState => (
     reduxState
 );
 
-export default connect(mapStateToProps)(Chart);
+export default connect(mapStateToProps)(SummaryChart);

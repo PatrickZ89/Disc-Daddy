@@ -89,7 +89,7 @@ class MapContainer extends Component {
             onClick={this.onMapClicked}
             initialCenter={userLocation} zoom={15}>
             <Marker onClick={this.onMarkerClick}
-                name={'PRIME BABY YEAH'} 
+                name={'Prime Academy'} 
                 position={userLocation}
                 />
 

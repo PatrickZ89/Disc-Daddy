@@ -20,7 +20,7 @@
   padding: 24px 10px;
   text-decoration: none;
   font-size: 15px;
-
+  font-family: 'Righteous', cursive;
   /* these last two make the logout button in
   the nav bar look like another link */
   border:none;

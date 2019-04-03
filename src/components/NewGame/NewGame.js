@@ -3,6 +3,29 @@ import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
 
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+
+const styles = theme => ({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 200,
+    },
+    dense: {
+      marginTop: 19,
+    },
+    menu: {
+      width: 200,
+    },
+  });
 
 class NewGame extends Component {
 
@@ -56,6 +79,9 @@ class NewGame extends Component {
     }
 
   render() {
+
+    const { classes } = this.props;
+
     return (
       <div>
           <h1>Game Setup</h1>
@@ -65,9 +91,24 @@ class NewGame extends Component {
               {this.props.playerReducer.map((player, i) => 
                 <li key={i}>{player.name} <button value={player.id} onClick={this.removePlayer}>remove</button></li> )}
           </ul>
+          <div >
           <h3>Add a New Player</h3>
-          <input type='text' placeholder="New Player" value={this.state.newPlayer} onChange={this.handleNameChange} />
+          <TextField
+          className="dark"
+          id="standard-name"
+          label="Name"
+        //   className={classes.textField}
+          value={this.state.newPlayer}
+          onChange={this.handleNameChange}
+          margin="normal"
+          color="primary"
+          autoComplete="off"
+            />
+          </div>
+          {/* <input type='text' placeholder="New Player" value={this.state.newPlayer} onChange={this.handleNameChange} /> */}
+          <div>
           <Button onClick={this.addPlayer} variant="contained" color="primary">Add Player</Button>
+          </div>
           <p>
           <Button onClick={this.newGame} variant="contained" color="primary">Start Game</Button>
           </p>
@@ -76,8 +117,12 @@ class NewGame extends Component {
   }
 }
 
+NewGame.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
 const mapStateToProps = reduxState => (
   reduxState
 );
 
-export default connect(mapStateToProps)(NewGame);
+export default withStyles(styles)(connect(mapStateToProps)(NewGame));

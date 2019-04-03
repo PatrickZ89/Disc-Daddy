@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// no longer using this component
+
+
+// this component is no longer is use
+
 
 class GameSummaryTable extends Component {
 

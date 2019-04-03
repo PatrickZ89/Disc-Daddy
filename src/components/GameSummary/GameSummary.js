@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Chart from '../Chart/Chart'
-
+import SummaryChart from '../SummaryChart/SummaryChart'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -38,6 +37,7 @@ class GameSummary extends Component {
                 <h1>
                     Game Summary
                 </h1>
+                <SummaryChart />
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>
@@ -94,7 +94,7 @@ class GameSummary extends Component {
                         </TableBody>
                     </Table>
                 </Paper>
-                <Chart />
+                
             </div>
         );
     }
